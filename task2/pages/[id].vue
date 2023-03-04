@@ -1,4 +1,6 @@
 <script setup>
+import { onMounted } from 'vue';
+
 const MIN_PAGE = 1
 const MAX_PAGE = 10
 
@@ -33,13 +35,23 @@ if (currentIndex > MAX_PAGE) pushIndex(MAX_PAGE)
 const canGoLeft = currentIndex > MIN_PAGE
 const canGoRight = currentIndex < MAX_PAGE
 
+const randomBetween = (min, max) => min + Math.floor(Math.random() * (max - min + 1))
+const randomColor = () => {
+    const r = randomBetween(0, 255);
+    const g = randomBetween(0, 255);
+    const b = randomBetween(0, 255);
+    return `rgb(${r},${g},${b})`
+}
+
 const onPrev = () => {
     direction.value = DIRECTIONS.LEFT
+    randomColor()
     pushIndex(currentIndex - 1)
 }
 
 const onNext = () => {
     direction.value = DIRECTIONS.RIGHT
+    randomColor()
     pushIndex(currentIndex + 1)
 }
 
@@ -70,7 +82,7 @@ const progress = `${(currentIndex - 1) * 50}px`
 .wrapper {
     width: 100%;
     min-height: 100vh;
-    background-color: #8DF6D0;
+    background-color: v-bind(randomColor());
     display: flex;
     flex-direction: column;
     justify-content: center;
