@@ -15,5 +15,8 @@
 
 body {
     overflow-x: hidden;
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    background-color: #8DF6D0;
 }
 </style>

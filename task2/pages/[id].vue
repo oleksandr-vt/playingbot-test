@@ -42,26 +42,69 @@ const onNext = () => {
     direction.value = DIRECTIONS.RIGHT
     pushIndex(currentIndex + 1)
 }
+
+const progress = `${(currentIndex - 1) * 50}px`
 </script>
 
 <template>
     <div class="wrapper">
-        {{ currentIndex }}
+        <h2>Page {{ currentIndex }} / 10</h2>
 
-        <button :disabled="!canGoLeft" @click="onPrev">
-            Previous
-        </button>
-    
-        <button :disabled="!canGoRight" @click="onNext">
-            Next
-        </button>
+        <div class="progress">
+            <div class="progress-gauge"></div>
+        </div>
+
+        <div class="btns">
+            <button :disabled="!canGoLeft" @click="onPrev">
+                Previous
+            </button>
+        
+            <button :disabled="!canGoRight" @click="onNext">
+                Next
+            </button>
+        </div>
     </div>
 </template>
 
 <style>
 .wrapper {
-    background: red;
-    border: 10px solid blue;
+    width: 100%;
+    min-height: 100vh;
+    background-color: #8DF6D0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    gap: 20px;
+}
+
+.progress {
+    width: 100%;
+    max-width: 450px;
+    height: 14px;
+    border-radius: 20px;
+    background-color: #f2f2f2;
+    border: 1px solid #000000;
+}
+
+.progress-gauge {
+    width: 100%;
+    max-width: v-bind(progress);
+    height: 100%;
+    border-radius: 20px;
+    background-color: #663299;
+}
+
+.btns {
+    margin-top: 20px;
+    display: flex;
+    gap: 15px;
+}
+
+.btns button {
+    padding: 5px;
+    cursor: pointer;
 }
 
 .page-enter-active,
